@@ -1,18 +1,13 @@
 .App {
   padding-top: 64px;
+  height: calc(100vh - 64px);
 }
 
-.App-container {
-  width: 50%;
-  min-width: 320px;
-  max-width: 500px;
-  margin: auto;
-}
+/*.App-container {*/
+/*  max-width: 50%;*/
+/*  margin: auto;*/
+/*}*/
 
-.App-body {
-  padding-top: 64px;
-  margin-top: 10vh;
-}
 
 
 a  {

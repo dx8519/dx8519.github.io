@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {HashRouter, Link, Route} from "react-router-dom";
 import Home from "./Home";
 import {AppBar, Button, createMuiTheme, Toolbar, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
@@ -20,11 +20,19 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: [
-      "monospace"
-    ],
-    fontSize:16
-
-
+      "Inter",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Roboto",
+      "Segoe UI",
+      "Helvetica",
+      "Arial",
+      "sans-serif"
+    ].join(","),
+    fontSize:16,
+    button: {
+      textTransform: 'none'
+    }
   }
 });
 
@@ -35,15 +43,12 @@ const theme = createMuiTheme({
 
 function App() {
 
-  const matchesMd = useMediaQuery(theme.breakpoints.up("sm"));
+  const matchesMd = useMediaQuery(theme.breakpoints.up("md"));
 
 
   const useStyles = makeStyles(theme => ({
     appBar: {
       boxShadow: "none",
-    },
-    homeLink: {
-      width: 0
     },
     main: {
       color: "#ffffff",
@@ -55,12 +60,6 @@ function App() {
       fontWeight: 700,
       letterSpacing: "0.06em",
       paddingLeft: 8,
-    },
-    toolBar: {
-      width: matchesMd ? "50%" : "90%",
-      minWidth: 300,
-      maxWidth: 540,
-      margin: "auto"
     }
 
   }));
@@ -70,37 +69,46 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
 
-      <BrowserRouter>
+      <HashRouter>
         <nav>
           <AppBar position="absolute" className={classes.appBar}>
-            <Toolbar className={classes.toolBar}>
-              <Grid container justify="space-between" alignItems="baseline">
-                <Grid item>
-                  <Link to="/" color="inherit" >
-                    <Typography className={classes.title}>
-                      DX8519
-                    </Typography>
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Button href={CV} target="_blank">CV</Button>
-                  <Link to="/about"><Button>About</Button></Link>
-                </Grid>
+            <Grid container justify="center">
+              <Grid item xs={12} md={10} lg={8} xl={6}>
+                <Toolbar>
+                  <Grid container justify="space-between" alignItems="center">
+                    <Grid item>
+                      <Link to="/" color="inherit" >
+                        <Typography className={classes.title}>
+                          DX8519
+                        </Typography>
+                      </Link>
+                    </Grid>
+                    <Grid item>
+                      <Button href={CV} target="_blank">CV</Button>
+                      <Link to="/about"><Button>About</Button></Link>
+                    </Grid>
+                  </Grid>
+
+
+
+                </Toolbar>
               </Grid>
+            </Grid>
 
-
-
-            </Toolbar>
           </AppBar>
         </nav>
         <main className={classes.main}>
-          <Route exact path="/" component={() => <Home/>} />
-          <Route path={process.env.PUBLIC_URL + "/about"} component={() => <About/>} />
+          <Grid container justify="center">
+            <Grid item xs={10} md={9} lg={8} xl={6}>
+              <Route exact path="/" component={() => <Home/>} />
+              <Route path={process.env.PUBLIC_URL + "/about"} component={() => <About/>} />
+            </Grid>
+          </Grid>
         </main>
 
 
 
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
 
 
