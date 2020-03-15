@@ -9,10 +9,13 @@ export default function About() {
         <Typography variant="h3">
           About
         </Typography>
+        <br />
         <Typography>
           Hey there, thanks for visiting my user page.
           <br />
+          <br />
           My name is David Xu and I'm a postgraduate software engineering student from The University of Melbourne.
+          <br />
           <br />
           Please feel free to view my CV for more information and contact details.
         </Typography>

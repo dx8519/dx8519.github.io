@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Link, Route} from "react-router-dom";
 import Home from "./Home";
 import {AppBar, Button, createMuiTheme, Toolbar, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import About from "./About";
-import Link from '@material-ui/core/Link';
+import Grid from "@material-ui/core/Grid";
+import CV from "./CV.pdf";
 
 
 const theme = createMuiTheme({
@@ -41,17 +42,27 @@ function App() {
     appBar: {
       boxShadow: "none",
     },
+    homeLink: {
+      width: 0
+    },
     main: {
       color: "#ffffff",
       minHeight: "100vh",
       backgroundColor: "#282c34"
     },
+
     title: {
-      flexGrow: 1,
       fontWeight: 700,
       letterSpacing: "0.06em",
-
+      paddingLeft: 8,
+    },
+    toolBar: {
+      width: matchesMd ? "50%" : "90%",
+      minWidth: 300,
+      maxWidth: 540,
+      margin: "auto"
     }
+
   }));
 
   const classes = useStyles();
@@ -62,24 +73,29 @@ function App() {
       <BrowserRouter>
         <nav>
           <AppBar position="absolute" className={classes.appBar}>
-            <Toolbar className="App-container">
-              <Typography className={classes.title}>
-                <Link href="/" color="inherit">
-                DX8519
-                </Link>
-              </Typography>
-              <Button href="/about">About</Button>
-              <Button>CV</Button>
+            <Toolbar className={classes.toolBar}>
+              <Grid container justify="space-between" alignItems="baseline">
+                <Grid item>
+                  <Link to="/" color="inherit" >
+                    <Typography className={classes.title}>
+                      DX8519
+                    </Typography>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Button href={CV} target="_blank">CV</Button>
+                  <Link to="/about"><Button>About</Button></Link>
+                </Grid>
+              </Grid>
+
+
+
             </Toolbar>
           </AppBar>
         </nav>
         <main className={classes.main}>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/about">
-            <About />
-          </Route>
+          <Route exact path="/" component={() => <Home/>} />
+          <Route path={process.env.PUBLIC_URL + "/about"} component={() => <About/>} />
         </main>
 
 

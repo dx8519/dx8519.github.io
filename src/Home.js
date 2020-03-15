@@ -13,7 +13,7 @@ const PORTRAIT_SIZE = "250";
 const useStyles = makeStyles({
   body: {
     textAlign: "center",
-    marginTop: "25vh"
+
   },
 
   portrait: {
@@ -29,7 +29,7 @@ export default function Home() {
   const classes=useStyles();
   return (
     <div className="App">
-      <div className={classnames("App-container", classes.body)}>
+      <div className={classnames("App-container", "App-body", classes.body)}>
         <img src={portrait} alt="portrait" height={PORTRAIT_SIZE} width={PORTRAIT_SIZE} className={classes.portrait}/>
         <Typography variant="h4">
           David Xu
