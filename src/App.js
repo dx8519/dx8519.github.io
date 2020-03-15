@@ -1,28 +1,14 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./Home";
 import {AppBar, Button, createMuiTheme, Toolbar, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {ThemeProvider} from "@material-ui/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import About from "./About";
+import Link from '@material-ui/core/Link';
 
-const useStyles = makeStyles(theme => ({
-  appBar: {
-    boxShadow: "none",
-  },
-  title: {
-    flexGrow: 1,
-    fontWeight: 700,
-    letterSpacing: "0.06em",
-
-  },
-  toolBar: {
-    width: "50%",
-    minWidth: 320,
-    maxWidth: 1080,
-    margin: "auto"
-  }
-}));
 
 const theme = createMuiTheme({
   palette: {
@@ -41,34 +27,66 @@ const theme = createMuiTheme({
   }
 });
 
+
+
+
+
+
 function App() {
+
+  const matchesMd = useMediaQuery(theme.breakpoints.up("sm"));
+
+
+  const useStyles = makeStyles(theme => ({
+    appBar: {
+      boxShadow: "none",
+    },
+    main: {
+      color: "#ffffff",
+      minHeight: "100vh",
+      backgroundColor: "#282c34"
+    },
+    title: {
+      flexGrow: 1,
+      fontWeight: 700,
+      letterSpacing: "0.06em",
+
+    }
+  }));
 
   const classes = useStyles();
 
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+
+      <BrowserRouter>
         <nav>
           <AppBar position="absolute" className={classes.appBar}>
-            <Toolbar className={classes.toolBar}>
+            <Toolbar className="App-container">
               <Typography className={classes.title}>
+                <Link href="/" color="inherit">
                 DX8519
+                </Link>
               </Typography>
-              <Button>About</Button>
+              <Button href="/about">About</Button>
               <Button>CV</Button>
             </Toolbar>
           </AppBar>
         </nav>
-        <main>
+        <main className={classes.main}>
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
         </main>
-      </ThemeProvider>
 
 
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </ThemeProvider>
+
 
   );
 }
